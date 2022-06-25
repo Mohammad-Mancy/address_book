@@ -46,7 +46,7 @@ async function addContact(body) {
     return await contact.save();
   }
 
-async function getContactsById(id) {
+async function getAllContacts(id) {
     return await Contact.find();
   }
 
@@ -55,5 +55,5 @@ module.exports = {
     getByEmail,
     getUsers,
     addContact,
-    getContactsById
+    getAllContacts
   } 

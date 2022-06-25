@@ -1,4 +1,4 @@
-const {addUser,getByEmail, addContact, getUsers, getContactsById} = require('../service')
+const {addUser,getByEmail, addContact, getUsers, getAllContacts} = require('../service')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
@@ -64,11 +64,10 @@ async function get(req, res) {
   
 async function getContacts(req, res) {
   try {
-    console.log(req.body)
-    const id = req.body.id;
-    const result = await getContactsById(id);
-    console.log('result contacts of specific user =>', result);
+    
+    const result = await getAllContacts();
     return res.send(result);
+
   } catch (error) {
     console.log(error);
     return res.status('500').send('something went worng')
