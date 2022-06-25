@@ -28,19 +28,26 @@ async function addContact(body) {
     const {
       name,
       email,
-      userId
+      phone_number,
+      relationship_status,
+      User,
+      location
     } = body;
 
     const contact = new Contact({
       name,
       email,
-      User:userId
+      phone_number,
+      relationship_status,
+      User,
+      location
     });
     console.log(User.contact);
     return await contact.save();
   }
+
 async function getContactsById(id) {
-    return await Contact.find(id).populate('users');
+    return await Contact.find();
   }
 
 module.exports = {

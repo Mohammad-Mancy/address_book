@@ -64,8 +64,8 @@ async function get(req, res) {
   
 async function getContacts(req, res) {
   try {
-    console.log(req.query)
-    const id = req.query.id;
+    console.log(req.body)
+    const id = req.body.id;
     const result = await getContactsById(id);
     console.log('result contacts of specific user =>', result);
     return res.send(result);
