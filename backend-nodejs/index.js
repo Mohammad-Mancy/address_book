@@ -21,4 +21,4 @@ app.use('/api/user', userRouter);
 //     res.send('hello world 22')
 // });
 
-app.listen(3000, () => console.log('Server running'));
+app.listen(3000, () => console.log('Server running')); 
