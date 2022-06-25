@@ -1,5 +1,6 @@
 const User = require('../../model/User');
-
+const Contact = require('../../model/Contact');
+const mongoose = require('mongoose');
 async function addUser(body, hashPassword) {
     const {
       name,
@@ -19,8 +20,33 @@ async function getByEmail(email) {
       email
     });
   }
+async function getUsers() {
+    return await User.find().populate('contacts');
+  }
+
+async function addContact(body) {
+    const {
+      name,
+      email,
+      userId
+    } = body;
+
+    const contact = new Contact({
+      name,
+      email,
+      User:userId
+    });
+    console.log(User.contact);
+    return await contact.save();
+  }
+async function getContactsById(id) {
+    return await Contact.find(id).populate('users');
+  }
 
 module.exports = {
     addUser,
-    getByEmail
+    getByEmail,
+    getUsers,
+    addContact,
+    getContactsById
   } 

@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
+const users = require('./User');
 
 const locationSchema = new mongoose.Schema({
     latitude: {
       type: String,
-      required: true,
+      required: false,
       max: 255,
     },
     longitude: {
       type: String,
-      required: true,
+      required: false,
       max: 255,
     }
   });
@@ -29,18 +30,18 @@ const contactSchema = new mongoose.Schema({
     },
     phone_number: {
       type: String,
-      required: true,
+      required: false,
       min: 6,
       max: 255,
     },
     relationship_status: {
       type: String,
-      required: true,
+      required: false,
       min: 6,
       max: 255,
     },
 
-    User: {
+    users: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
       },

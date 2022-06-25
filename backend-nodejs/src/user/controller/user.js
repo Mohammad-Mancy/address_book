@@ -1,4 +1,4 @@
-const {addUser,getByEmail} = require('../service')
+const {addUser,getByEmail, addContact, getUsers, getContactsById} = require('../service')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
@@ -31,14 +31,54 @@ async function login(req, res) {
         {_id: user._id, name: user.name, email: user.email},
         TOKEN_SECRET
       );
-  
       return res.header('auth-token', token).send(token);
     } catch (error) {
       console.log(error);
       res.status(500).send(error);
     }
   }
+async function get(req, res) {
+    try {
+
+        // const id = req.query.id;
+        const result = await getUsers();
+        console.log('result of specific user =>', result);
+        return res.send(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function createContact(req, res) {
+    try {
+      console.log(req.body);
+
+      const addContactResult = await addContact(req.body);
+      console.log('addContactResult =>', addContactResult);
+
+      return res.send({ user: addContactResult._id });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+async function getContacts(req, res) {
+  try {
+    console.log(req.query)
+    const id = req.query.id;
+    const result = await getContactsById(id);
+    console.log('result contacts of specific user =>', result);
+    return res.send(result);
+  } catch (error) {
+    console.log(error);
+    return res.status('500').send('something went worng')
+  }
+}
+
 module.exports = {
     register,
-    login
+    login,
+    get,
+    createContact,
+    getContacts
   }; 

@@ -1,16 +1,21 @@
-function testMiddleware() {
-    return (req, res, next) => {
-      console.log(`- - ${req.query.id} - -`);
-  
-      // bcrypt you need to check if its valid conn
-  
-      // check jwt token if it is valid
-      // validate forms
-      // not authorized 403
-  
-      next();
-      // res.send('result');
-    }
+const jwt = require("jsonwebtoken");
+
+const config = process.env;
+
+const verifyToken = (req, res, next) => {
+  const token =
+    req.body.token || req.query.token || req.headers["x-access-token"];
+
+  if (!token) {
+    return res.status(403).send("A token is required for authentication");
   }
-  
-  module.exports = testMiddleware;
+  try {
+    const decoded = jwt.verify(token, config.TOKEN_SECRET);
+    req.user = decoded;
+  } catch (err) {
+    return res.status(401).send("Invalid Token");
+  }
+  return next();
+};
+
+module.exports = verifyToken;
