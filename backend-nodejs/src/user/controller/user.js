@@ -14,9 +14,9 @@ async function register(req, res) {
       const addUserResult = await addUser(req.body, hashPassword);
       console.log('addUserResult =>', addUserResult);
 
-      return res.send({ user: addUserResult._id });
+      return res.status(200).send({ user: addUserResult._id });
     } catch (error) {
-      console.log(error);
+      res.status(500).send(error);
     }
   }
 async function login(req, res) {

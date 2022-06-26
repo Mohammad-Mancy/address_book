@@ -11,3 +11,51 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.login-div{
+  width:400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #ffb142;
+  padding: 10px;
+}
+.login-div > form > div > input{
+  width: 375px;
+  border: 2px solid #ffb142;
+  border-radius: 5px;
+  padding: 10px;
+}
+.login-div > form > div >label{
+  font-size: 24px;
+  font-weight: 400;
+}
+.btn-login,.link-signup,.btn-signup,.link-signin{
+  text-align: center;
+}
+.btn-login > .btn-submit,.btn-signup>.btn-submit{
+  width: 60%;
+  background-color: #ffb142;
+  padding: 10px;
+  border-radius: 10px;
+  border: #ffb142;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+}
+.btn-login > .btn-submit:hover,.btn-signup>.btn-submit:hover{
+  background-color: #cc8e35;
+}
+.link-signup,.link-signin{
+  padding: 15px;
+}
+.link-signup > .link-register,.link-signin>.link-login{
+  text-decoration: none;
+  font-size: 24px;
+  color:#cc8e35;
+  font-weight: 700;
+}
+.link-signup > .link-register:hover,.link-signin>.link-login:hover{
+  color:#ffb142
+}
