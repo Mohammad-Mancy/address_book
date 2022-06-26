@@ -1,12 +1,11 @@
-import React from "react";
-import { useState,useEffect } from "react";
+import React,{ useState} from "react";
 import {Link} from "react-router-dom";
 
 const Signup =() =>{
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    var handleSubmit = async (e) => {
+    let handleSubmit = async (e) => {
         e.preventDefault();
         try {
           var res = await fetch("http://localhost:3000/api/user/register", {
@@ -18,6 +17,8 @@ const Signup =() =>{
               password: password,
             }),
           });
+          const data = await res.json();
+          console.log(data.user)
           if (res.status === 200) {
             setName("");
             setEmail("");

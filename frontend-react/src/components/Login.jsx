@@ -3,13 +3,36 @@ import { useState } from "react";
 import {Link} from "react-router-dom";
 
 const Login = () => {
-    const [user, setUser] = useState([]);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    let handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          let res = await fetch("http://localhost:3000/api/user/login", {
+            method: "POST",
+            headers:{ 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email,
+              password: password,
+            }),
+          });
+          
+          if (res.status === 200) {
+            setEmail("");
+            setPassword("");
+            console.log(res)
+          } else {
+            alert("Some error occured");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
+    
     return (
     <>
     <div className="login-div">
-        <form>
+        <form onSubmit={handleSubmit}>
             <div>
                 <label>Email</label>
                 <br/>
