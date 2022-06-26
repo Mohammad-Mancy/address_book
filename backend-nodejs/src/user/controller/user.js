@@ -31,7 +31,11 @@ async function login(req, res) {
         {_id: user._id, name: user.name, email: user.email},
         TOKEN_SECRET
       );
-      return res.status(200).header('auth-token', token).send(token);
+      let dataResponse = {
+        tokenkey: token,
+        userId: user.id
+      };
+      return res.status(200).header('auth-token', token).send(dataResponse);
     } catch (error) {
       console.log(error);
       res.status(500).send(error);
@@ -64,7 +68,6 @@ async function get(req, res) {
   
 async function getContacts(req, res) {
   try {
-    
     const result = await getAllContacts();
     return res.send(result);
 

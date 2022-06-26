@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const navigation = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     let handleSubmit = async (e) => {
@@ -16,11 +17,15 @@ const Login = () => {
               password: password,
             }),
           });
-          
+          const data = await res.json();
+          console.log(data)
           if (res.status === 200) {
             setEmail("");
             setPassword("");
+            localStorage.setItem('tokenKey',data.tokenkey)
+            localStorage.setItem('userId',data.userId)
             console.log(res)
+            navigation('./main')
           } else {
             alert("Some error occured");
           }
@@ -32,7 +37,9 @@ const Login = () => {
     return (
     <>
     <div className="login-div">
-        <form onSubmit={handleSubmit}>
+        <form 
+        onSubmit={handleSubmit}
+        >
             <div>
                 <label>Email</label>
                 <br/>
