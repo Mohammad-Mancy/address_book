@@ -69,6 +69,7 @@ async function get(req, res) {
 async function getContacts(req, res) {
   try {
     const result = await getAllContacts();
+    JSON.stringify(result)
     return res.send(result);
 
   } catch (error) {

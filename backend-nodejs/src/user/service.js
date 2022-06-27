@@ -46,9 +46,8 @@ async function addContact(body) {
     return await contact.save();
   }
 
-async function getAllContacts(id) {
-    const User = {id}
-    return await Contact.find(User);
+async function getAllContacts() {
+    return await Contact.find();
   }
 
 module.exports = {
